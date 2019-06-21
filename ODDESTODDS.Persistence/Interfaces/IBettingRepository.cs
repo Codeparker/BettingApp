@@ -8,7 +8,7 @@ namespace ODDESTODDS.Persistence.Interfaces
 {
     public interface IBettingRepository
     {
-        Task<IEnumerable<GameInfo>> ListAsync();
+        Task<IEnumerable<GameInfo>> GameListAsync();
         Task AddAsync(GameInfo game, GameOdd odds);
         //Task<GameInfo> FindByIdAsync(int id);
         //void Update(Product product);

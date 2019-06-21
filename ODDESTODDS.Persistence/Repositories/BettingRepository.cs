@@ -20,9 +20,9 @@ namespace ODDESTODDS.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<GameInfo>> ListAsync()
+        public async Task<IEnumerable<GameInfo>> GameListAsync()
         {
-            return await _context.GameInfos.AsNoTracking().ToListAsync();
+            return await _context.GameInfos.Include(p=>p.GameOdd).AsNoTracking().ToListAsync();
         }
     }
 }
