@@ -5,8 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DesignTimeDbContextFactory.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ODDESTODDS.Application\ODDESTODDS.Application.csproj" />
+    <ProjectReference Include="..\ODDESTODDS.Domain\ODDESTODDS.Domain.csproj" />
+    <ProjectReference Include="..\ODDESTODDS.Persistence\ODDESTODDS.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
