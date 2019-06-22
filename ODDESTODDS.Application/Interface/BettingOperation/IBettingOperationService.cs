@@ -19,7 +19,7 @@ namespace ODDESTODDS.Application.Interface.BettingOperation
         Task<Response<CreateGameDto>> GetGameForEdit(long Id);
         Task<Response<GamePreviewDto>> GetGameById(long Id);
 
-        Response<string> UpdateGame(CreateGameDto model);
+        Task<Response<string>> UpdateGame(CreateGameDto model);
 
         Task<Response<string>> DeleteGames(long Id);
 

@@ -9,6 +9,9 @@ namespace ODDESTODDS.Application.DtoModels.Game
     {
         
         public long Id { get; set; }
+
+        public long OddId { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string HomeTeam { get; set; }
@@ -29,8 +32,6 @@ namespace ODDESTODDS.Application.DtoModels.Game
         [Display(Name = "X")]
         public double DrawOdd { get; set; }
 
-        //[DataType(DataType.DateTime)]
-        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm:ss t}", ApplyFormatInEditMode =true)]
         [Required]
         public string GameStartTime { get; set; }
 

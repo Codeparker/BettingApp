@@ -53,7 +53,7 @@ namespace ODDESTODDS.Application.Implemetations
                         DrawOdd = model.GameOdd.DrawOdd,
                         GameStartTime = model.GameStartTime,
                         GameStatusDescription = Enum.GetName(typeof(Enums.GameStatus), model.GameStatus),
-                        GameId = model.GameStatus,
+                        GameStatus = model.GameStatus,
                         Id = model.Id,
                     }
 
@@ -171,7 +171,7 @@ namespace ODDESTODDS.Application.Implemetations
                 Message = $"{response.Count()} Current game data found",
                 Result = response.ToList()?.Select(item => new GamePreviewDto()
                 {
-                   TeamDescription=$"{item.HomeTeam} - {item.AwayTeam}",
+                    TeamDescription = $"{item.HomeTeam} - {item.AwayTeam}",
                    HomeOdd=item.GameOdd.HomeOdd,
                    AwayOdd = item.GameOdd.AwayOdd,
                    DrawOdd = item.GameOdd.DrawOdd,
@@ -181,7 +181,8 @@ namespace ODDESTODDS.Application.Implemetations
                    GameStatusDescription= Enum.GetName(typeof(Enums.GameStatus), item.GameStatus),
                    GameStatus=item.GameStatus,
                    Id=item.Id,
-                   GameId=item.Id
+                    OddId = item.GameOdd.Id
+
 
 
                 }).ToList()
@@ -220,7 +221,8 @@ namespace ODDESTODDS.Application.Implemetations
                     GameStatusDescription = Enum.GetName(typeof(Enums.GameStatus), response.GameStatus),
                     GameStatus = response.GameStatus,
                     Id = response.Id,
-                    GameId = response.Id
+                    OddId=response.GameOdd.Id
+
 
 
                 }
@@ -256,7 +258,8 @@ namespace ODDESTODDS.Application.Implemetations
                     GameStartTime = response.GameStartTime.ToString(),
                     GameStatus = response.GameStatus,
                     Id = response.Id,
-                    
+                    OddId= response.GameOdd.Id
+
 
 
                 }
@@ -264,7 +267,7 @@ namespace ODDESTODDS.Application.Implemetations
             };
         }
 
-        public Response<string> UpdateGame(CreateGameDto model)
+        public async Task<Response<string>> UpdateGame(CreateGameDto model)
         {
             try
             {
@@ -276,9 +279,10 @@ namespace ODDESTODDS.Application.Implemetations
                     GameStartTime = gamestart,
                     GameStatus = model.GameStatus,
                     Id= model.Id,
-                    GameOdd = new GameOdd() { AwayOdd = model.AwayOdd, HomeOdd = model.HomeOdd, DrawOdd = model.DrawOdd }
+                    GameOdd = new GameOdd() { AwayOdd = model.AwayOdd,Id=model.OddId, HomeOdd = model.HomeOdd, DrawOdd = model.DrawOdd }
                 };
                 var response =  _bettingRepository.UpdateGame(game);
+                await _unitOfWork.CompleteAsync();
                 return new Response<string>
                 {
                     Status = true,

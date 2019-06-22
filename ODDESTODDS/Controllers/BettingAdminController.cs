@@ -37,11 +37,15 @@ namespace ODDESTODDS.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddorEdit([Bind("HomeTeam,AwayTeam,HomeOdd,AwayOdd,DrawOdd,GameStartTime")] CreateGameDto model)
+        public async Task<IActionResult> AddorEdit([Bind("Id,OddId,HomeTeam,AwayTeam,HomeOdd,AwayOdd,DrawOdd,GameStartTime")] CreateGameDto model)
         {
             if (ModelState.IsValid)
             {
-                 await _bettingService.AddGame(model);
+                if(model.Id>0 && model.OddId>0)
+                  await _bettingService.UpdateGame(model);
+                else
+                   await _bettingService.AddGame(model);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(model);

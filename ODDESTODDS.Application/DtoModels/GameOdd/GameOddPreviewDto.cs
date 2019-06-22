@@ -12,7 +12,6 @@ namespace ODDESTODDS.Application.DtoModels.GameOdd
         public double DrawOdd { get; set; }
         public int OddStatus { get; set; }
 
-        public long? GameId { get; set; }
 
         public string OddStatusDescription { get; set; }
     }

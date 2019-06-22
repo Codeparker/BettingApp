@@ -5,9 +5,9 @@ using System.Text;
 
 namespace ODDESTODDS.Application.DtoModels.Game
 {
-    public class GamePreviewDto :GameOdd.GameOddPreviewDto
+    public class GamePreviewDto : GameOdd.GameOddPreviewDto
     {
-        public new long GameId { get; set; }
+        public new long Id { get; set; }
         public string TeamDescription { get; set; }
         public string HomeTeam { get; set; }
         public string AwayTeam { get; set; }
@@ -16,6 +16,8 @@ namespace ODDESTODDS.Application.DtoModels.Game
         public DateTime? GameStartTime { get; set; }
         public int GameStatus { get; set; }
         public string GameStatusDescription { get; set; }
+
+        public  long OddId { get; set; }
 
 
     }
