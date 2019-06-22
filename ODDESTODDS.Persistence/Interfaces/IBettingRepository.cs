@@ -9,9 +9,12 @@ namespace ODDESTODDS.Persistence.Interfaces
     public interface IBettingRepository
     {
         Task<IEnumerable<GameInfo>> GameListAsync();
-        Task AddAsync(GameInfo model);
-        //Task<GameInfo> FindByIdAsync(int id);
-        //void Update(Product product);
-        //void Remove(Product product);
+        Task AddGameAsync(GameInfo model);
+
+        Task<GameInfo> FindGameByIdAsync(long Id);
+        Task<GameOdd> FindGameOddByIdAsync(long Id);
+        GameInfo UpdateGame(GameInfo model);
+        void RemoveGame(GameInfo model);
+        void RemoveOdd(GameOdd model);
     }
 }

@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<hr />
+<div class="row">
+    <div class="col-lg-4">
+        <a asp-area="" asp-controller="BettingAdmin" asp-action="AddorEdit" class="btn btn-info">Create New Game</a>
+    </div>
+</div>
+    
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                GameStartTime
+            </th>
+            <th>
+                Games
+            </th>
+            <th>
+                1
+            </th>
+            <th>
+                X
+            </th>
+            <th>
+                2
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var game in (dynamic)ViewData["game_list"])
+        {
+            <tr>
+                <td>
+
+                    @game.GameStartTime
+                </td>
+
+                <td>
+
+                    @game.TeamDescription
+                </td>
+
+                <td>
+                    @game.HomeOdd
+                </td>
+                <td>
+                    @game.DrawOdd
+
+                </td>
+                <td>
+                    @game.AwayOdd
+
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete",new {Id= game.GameId})"><i class="glyphicon glyphicon-trash"></i></a>
+                    <a href="@Url.Action("AddorEdit",new {Id= game.GameId})"><i class="glyphicon glyphicon-edit"> </i></a>
+                </td>
+
+
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+
+
+
+

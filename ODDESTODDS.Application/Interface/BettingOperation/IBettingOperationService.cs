@@ -15,9 +15,15 @@ namespace ODDESTODDS.Application.Interface.BettingOperation
         
         Task<Response<List<GamePreviewDto>>> GetCurrentGames(int status);
 
-        Task<Response<List<GameOddPreviewDto>>> GetGameOdd(int gameId);
 
-        Task<Response<string>> UpdateGame(CreateGameDto model);
+        Task<Response<CreateGameDto>> GetGameForEdit(long Id);
+        Task<Response<GamePreviewDto>> GetGameById(long Id);
+
+        Response<string> UpdateGame(CreateGameDto model);
+
+        Task<Response<string>> DeleteGames(long Id);
+
+        Task<Response<string>> DeleteOdd(long Id);
 
 
 

@@ -21,8 +21,4 @@
     <ProjectReference Include="..\ODDESTODDS.Persistence\ODDESTODDS.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\BettingAdmin\" />
-  </ItemGroup>
-
 </Project>
