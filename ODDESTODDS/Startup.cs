@@ -39,7 +39,7 @@ namespace ODDESTODDS
             services.AddScoped<IBettingRepository, BettingRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IBettingOperationService, BettingOperationService>();
-
+      
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -59,7 +59,7 @@ namespace ODDESTODDS
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+          
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

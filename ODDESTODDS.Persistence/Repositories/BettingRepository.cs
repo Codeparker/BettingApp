@@ -13,11 +13,11 @@ namespace ODDESTODDS.Persistence.Repositories
     {
         public BettingRepository(ApplicatioDBContext context) : base(context) { }
         
-        public async Task AddAsync(GameInfo game, GameOdd odds)
+        public async Task AddAsync(GameInfo model)
         {
-            var response=await _context.GameInfos.AddAsync(game);
-           
-            throw new NotImplementedException();
+            
+            await _context.GameInfos.AddAsync(model);
+            
         }
 
         public async Task<IEnumerable<GameInfo>> GameListAsync()

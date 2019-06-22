@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ODDESTODDS.Application.DtoModels.Game.GamePreviewDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Games</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.GameStartTime)
+            </th>
+            <th>
+                Games
+            </th>
+            <th>
+                1
+            </th>
+            <th>
+                X
+            </th>
+            <th>
+                2
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var game in (dynamic)ViewData["game_list"])
+        {
+            <tr>
+                <td>
+                   
+                    @game.GameStartTime
+                </td>
+
+                <td>
+                    
+                    @game.TeamDescription
+                </td>
+
+                <td>
+                    <button>
+                      
+                        @game.HomeOdd
+                    </button>
+                </td>
+                <td>
+                    <button>
+                       
+                        @game.DrawOdd
+                    </button>
+                </td>
+                <td>
+                    <button>
+                       
+                        @game.AwayOdd
+                    </button>
+                </td>
+
+
+            </tr>
+          
+        }
+       
+    </tbody>
+</table>
+
+

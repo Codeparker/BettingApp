@@ -10,9 +10,9 @@ namespace ODDESTODDS.Application.Interface.BettingOperation
 {
     public interface IBettingOperationService
     {
-        Task<Response<string>> AddGame(CreateGameDto model);
+        Task<Response<GamePreviewDto>> AddGame(CreateGameDto model);
 
-        Task<Response<string>> AddOdd(CreateGameOddDto model);
+        
         Task<Response<List<GamePreviewDto>>> GetCurrentGames(int status);
 
         Task<Response<List<GameOddPreviewDto>>> GetGameOdd(int gameId);

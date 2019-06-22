@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using ODDESTODDS.Domain.Entity;
 
 namespace ODDESTODDS.Application.Implemetations
 {
@@ -23,15 +24,37 @@ namespace ODDESTODDS.Application.Implemetations
             _unitOfWork = unitOfWork;
         
         }
-        public async  Task<Response<string>> AddGame(CreateGameDto model)
+        public async Task<Response<GamePreviewDto>> AddGame(CreateGameDto data)
         {
-            await _unitOfWork.CompleteAsync();
-            throw new NotImplementedException();
-        }
 
-        public Task<Response<string>> AddOdd(CreateGameOddDto model)
-        {
-            throw new NotImplementedException();
+            var model = new GameInfo()
+            {
+                AwayTeam = data.AwayTeam,
+                HomeTeam = data.HomeTeam,
+                GameStartTime = data.GameStartTime,
+                GameStatus = data.GameStatus,
+                GameOdd = new GameOdd() { AwayOdd = data.AwayOdd, HomeOdd = data.HomeOdd, DrawOdd = data.DrawOdd }
+            };
+            await _bettingRepository.AddAsync(model);
+            await _unitOfWork.CompleteAsync();
+            return new Response<GamePreviewDto>
+            {
+                Status = true,
+                Message = $"Game information successfully save",
+                Result = new GamePreviewDto() {
+
+                    TeamDescription = $"{model.HomeTeam} - {model.AwayTeam}",
+                    HomeOdd = model.GameOdd.HomeOdd,
+                    AwayOdd = model.GameOdd.AwayOdd,
+                    DrawOdd = model.GameOdd.DrawOdd,
+                    GameStartTime = model.GameStartTime,
+                    GameStatusDescription = Enum.GetName(typeof(Enums.GameStatus), model.GameStatus),
+                    GameId = model.GameStatus,
+                    Id = model.Id,
+                }
+
+            };
+
         }
 
         public async Task<Response<List<GamePreviewDto>>> GetCurrentGames(int status)
@@ -67,7 +90,7 @@ namespace ODDESTODDS.Application.Implemetations
 
             };
             return clientResponse;
-            throw new NotImplementedException();
+           
         }
 
         public Task<Response<List<GameOddPreviewDto>>> GetGameOdd(int gameId)
