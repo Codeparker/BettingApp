@@ -5,7 +5,7 @@
 
 <h2>Games</h2>
 
-<table class="table">
+<table class="table table-striped table-responsive table-hover" id="tblGames">
     <thead>
         <tr>
 
@@ -27,45 +27,67 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var game in (dynamic)ViewData["game_list"])
-        {
-            <tr>
-                <td>
-                   
-                    @game.GameStartTime
-                </td>
-
-                <td>
-                    
-                    @game.TeamDescription
-                </td>
-
-                <td>
-                    <button>
-                      
-                        @game.HomeOdd
-                    </button>
-                </td>
-                <td>
-                    <button>
-                       
-                        @game.DrawOdd
-                    </button>
-                </td>
-                <td>
-                    <button>
-                       
-                        @game.AwayOdd
-                    </button>
-                </td>
-
-
-            </tr>
-          
-        }
-       
-    </tbody>
+    <tbody></tbody>
 </table>
+@section Scripts{
+    <script src="https://js.pusher.com/4.2/pusher.min.js"></script>
+    <script src="https://unpkg.com/moment" ></script>
+    <script type="text/javascript">
+
+        $(function () {
+            
+             LoadData();  
+       
+         });
+         Pusher.logToConsole = true;
+        const pusher = new Pusher('8547d7df8ea09890aded', {
+            cluster: 'eu',
+             forceTLS: true
+        });
+        const channel = pusher.subscribe('betting');
+
+        channel.bind('game_event', function (data) {
+            console.log('ChannelBind: ', data);
+            LoadData();
+            alert(data.message);
+            
+        });
+        function LoadData() {  
+        $("#tblGames tbody tr").remove();  
+        $.ajax({  
+            type: 'GET',  
+            url: '@Url.Action("GetAll")',  
+            dataType: 'json',  
+            data: { id: '' },  
+            success: function (data) {
+                console.log('Data From Get ALL:', data);
+                var items = '';  
+            
+                $.each(data, function (i, item) {  
+                    var rows = "<tr>"  
+                    + "<td>" + moment(item.gameStartTime ).format("dddd, MMMM Do YYYY, h:mm:ss a")+"</td>"  
+                    + "<td>" + item.teamDescription + "</td>"  
+                    + "<td><span class='table-remove'><button type='button'class='btn btn-info btn-rounded btn-sm my-0'> " + item.homeOdd + "</button></span></td>"
+                    + "<td><span class='table-remove'><button type='button'class='btn btn-info btn-rounded btn-sm my-0'> " + item.drawOdd + "</button></span></td>"  
+                    + "<td><span class='table-remove'><button type='button'class='btn btn-info btn-rounded btn-sm my-0'> " + item.awayOdd + "</button></span></td>"    
+ 
+                    + "</tr>";  
+                    $('#tblGames tbody').append(rows);  
+                });  
+            },  
+            error: function (ex) {  
+                console.log("ERROR: ", ex);
+                var r = jQuery.parseJSON(response.responseText);  
+                alert("Message: " + r.Message);  
+                alert("StackTrace: " + r.StackTrace);  
+                alert("ExceptionType: " + r.ExceptionType);  
+            }  
+        });  
+        return false;  
+    } 
+      
+    </script>
+}
+
 
 

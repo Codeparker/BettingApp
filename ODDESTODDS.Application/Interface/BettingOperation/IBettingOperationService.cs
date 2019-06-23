@@ -13,7 +13,7 @@ namespace ODDESTODDS.Application.Interface.BettingOperation
         Task<Response<GamePreviewDto>> AddGame(CreateGameDto model);
 
         
-        Task<Response<List<GamePreviewDto>>> GetCurrentGames(int status);
+        Task<Response<List<GamePreviewDto>>> GetCurrentGames(int status=0);
 
 
         Task<Response<CreateGameDto>> GetGameForEdit(long Id);

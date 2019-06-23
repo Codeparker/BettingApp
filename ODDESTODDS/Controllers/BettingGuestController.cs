@@ -9,7 +9,7 @@ using ODDESTODDS.Application.Interface.BettingOperation;
 namespace ODDESTODDS.Controllers
 {
 
-    [Route("api/[controller]")]
+   
     public class BettingGuestController : Controller
     {
         private readonly IBettingOperationService _bettingService;
@@ -20,16 +20,16 @@ namespace ODDESTODDS.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var response = await _bettingService.GetCurrentGames((int)Application.Enums.GameStatus.Inprogress);
+            var response = await _bettingService.GetCurrentGames();
             ViewData["game_list"] = response.Result;
             return View();
         }
         [HttpGet]
-        [Route("api/[controller]/GetAll")]
+        //[Route("api/[controller]/GetAll")]
         public async Task<IEnumerable<GamePreviewDto>> GetAll()
         {
 
-            var response = await _bettingService.GetCurrentGames((int)Application.Enums.GameStatus.AllGame);
+            var response = await _bettingService.GetCurrentGames();
             return response.Result;
         }
 

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ODDESTODDS.Application.DtoModels.Game;
 using ODDESTODDS.Application.Interface.BettingOperation;
-using PusherServer;
+using ODDESTODDS.Helpers;
 
 namespace ODDESTODDS.Controllers
 {
-  
+
     public class BettingAdminController : Controller
     {
         private readonly IBettingOperationService _bettingService;
@@ -45,7 +42,7 @@ namespace ODDESTODDS.Controllers
                   await _bettingService.UpdateGame(model);
                 else
                    await _bettingService.AddGame(model);
-
+                await ChannelHelper.Trigger(model, "betting", "game_event");
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
@@ -59,6 +56,7 @@ namespace ODDESTODDS.Controllers
         public async Task<IActionResult> Delete(long Id)
         {
             await _bettingService.DeleteGames(Id);
+            await ChannelHelper.Trigger(Id, "betting", "game_event");
             return RedirectToAction(nameof(Index));
            
         }
