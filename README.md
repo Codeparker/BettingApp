@@ -13,7 +13,7 @@ Layers
 ------------------------------------------
 Application:this is where the business logic stays.
 Domain: All application Database Enities.
-Persistence: All Data call eg Add, Delete, Update, Get happens in there.
+Persistence: All Data call eg Add, Delete, Update, Get happens in there, I use sql lite for database.
 Presentation/Ui: contains al the view or user interface for the project .
 UnitTest:Contain unit tests.
 
