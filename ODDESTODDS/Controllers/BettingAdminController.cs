@@ -17,7 +17,7 @@ namespace ODDESTODDS.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var response = await _bettingService.GetCurrentGames((int)Application.Enums.GameStatus.Inprogress);
+            var response = await _bettingService.GetCurrentGames(0);
             ViewData["game_list"] = response.Result;
             return View();
         }
@@ -33,7 +33,7 @@ namespace ODDESTODDS.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> AddorEdit([Bind("Id,OddId,HomeTeam,AwayTeam,HomeOdd,AwayOdd,DrawOdd,GameStartTime")] CreateGameDto model)
         {
             if (ModelState.IsValid)

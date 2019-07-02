@@ -29,7 +29,8 @@ namespace ODDESTODDS.Application.Implemetations
         {
             try
             {
-                var gamestart = DateTime.Parse(data.GameStartTime);
+                var gamestart = DateTime.Parse(data.GameStartTime);//testable
+                
                 var model = new GameInfo()
                 {
                     AwayTeam = data.AwayTeam,
@@ -44,7 +45,7 @@ namespace ODDESTODDS.Application.Implemetations
                 {
                     Status = true,
                     Message = $"Game information successfully save",
-                    Result = new GamePreviewDto()
+                    Result = new GamePreviewDto()//testable
                     {
 
                         TeamDescription = $"{model.HomeTeam} - {model.AwayTeam}",
@@ -66,7 +67,7 @@ namespace ODDESTODDS.Application.Implemetations
                 return new Response<GamePreviewDto>
                 {
                     Status = false,
-                    Message = $"{ex.Message}:Internal error occured , please try again",
+                    Message = "Internal error occured , please try again",
                     Result = default(GamePreviewDto)
 
                 };
